@@ -7,7 +7,7 @@
     text-align: center;
 }
   @media (max-width:800px) 
-  {   .dragonMedia{
+  {   .Dragon{
        width: 450px;
        background-color:red
   }

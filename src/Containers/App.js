@@ -1,29 +1,29 @@
 // import logo from "./logo.svg";
-import "./App.css";
+import appClasses from  "./App.module.css";
 // import Radium,{StyleRoot} from "radium";
 import { Component } from "react";
-import Dragon from "./Dragon/Dragon";
-import styled from "styled-components";
+import Dragon from "../Components/Dragons/Dragon/Dragon";
+// import styled from "styled-components";
 // import Phone from "./Phone/Phone";
 
-const StyledButton = styled.button`
-  background-color: ${(props) => {
-    return props.altClass ? "green" : "black";
-  }};
-  color: white;
-  border: 2px solid gray;
-  padding: 3px;
-  margin: 20px;
-  cursor: pointer;
-  font: inherit;
+// const StyledButton = styled.button`
+//   background-color: ${(props) => {
+//     return props.altClass ? "green" : "black";
+//   }};
+//   color: white;
+//   border: 2px solid gray; 
+//   padding: 3px;
+//   margin: 20px;  
+//   cursor: pointer;
+//   font: inherit;       
 
-  &:hover {
-    background-color: ${(props) => {
-      return props.altClass ? "lightgreen" : "grey";
-    }};
-    color: purple;
-  }
-`;
+//   &:hover {
+//     background-color: ${(props) => {
+//       return props.altClass ? "lightgreen" : "grey";
+//     }};
+//     color: purple;
+//   }
+// `;
 
 class App extends Component {
   state = {
@@ -50,9 +50,8 @@ class App extends Component {
   };
 
   nameChangeHandler = (event, id) => {
-    const dragon = { ...this.state.dragon.find((el) => el.id === id) };
+    const dragon = {...this.state.dragon.find((el) => el.id === id) };
     const dragonIndex = this.state.dragon.findIndex((el) => el.id === id);
-
     const newDragonName = event.target.value;
     dragon.name = newDragonName;
     const dragonNew = [...this.state.dragon];
@@ -103,6 +102,8 @@ class App extends Component {
     // };
     //
     let dragonVisibility = null;
+    const buttonClasses = [appClasses.Button];
+
     if (this.state.isVisible) {
       dragonVisibility = (
         <div>
@@ -145,23 +146,26 @@ class App extends Component {
       //   backgroundColor: "grey",
       //   color: "purple",
       // };
+      buttonClasses.push(appClasses.Black);
     }
 
     const classes = [];
-    if (this.state.dragon.length <= 2) classes.push("blue");
-    if (this.state.dragon.length <= 1) classes.push("bold");
+    if (this.state.dragon.length <= 2) classes.push(appClasses.blue);
+    if (this.state.dragon.length <= 1) classes.push(appClasses.bold);
 
     return (
       // <StyleRoot>
-      <div className="App">
+      <div className={appClasses.App}>
         <h1>Hii,This is Pratyush Bhatt</h1>
         <p className={classes.join(" ")}>Brown brown munde brown munde!!</p>
-        <StyledButton
+        <button
           onClick={this.toggleNameHandler}
-          altClass={this.state.isVisible}
+          className={buttonClasses.join(' ')}
+          // altClass={this.state.isVisible} used for styled components
+
         >
           Toggle Variations
-        </StyledButton>
+        </button>
         {dragonVisibility}
 
         {/* <Phone name="Samsung Galaxy S20+ BTS Edition" cost="Rs.87,000" />
@@ -178,6 +182,32 @@ class App extends Component {
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // USING THE FUNCTIONAL COMPONENTS
 // import {useState} from "react";

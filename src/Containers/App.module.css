@@ -3,34 +3,3 @@
 }
 
 
-.blue{
-  color:blue;
-}
-
-.bold{
-  font-weight:bolder;
-}
-
-.Button{
-background-color: green;
-color: white;
-border: 2px solid gray;
-padding: 3px;
-margin: 20px;
-cursor: pointer;
-font: inherit;
-
-}
-.Button:hover {
-  background-color: lightgreen;
-  color: purple;
-}
-
-.Button.Black{
-  background-color: black;
-  color:white;
-}
-.Button.Black:hover{
-  background-color: gray;
-  color:greenyellow;
-}

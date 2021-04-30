@@ -1,9 +1,8 @@
 import dragonClasses from "./Dragon.module.css";
+import { Component } from "react";
+
 // import styled from "styled-components";
 // import Radium from "radium";
-
-
-
 
 // NOTE: style.x returns a component, so no need to make a traditional component function, as its already returned, just store it in a variable.
 // const StyledDiv = styled.div`
@@ -19,23 +18,30 @@ import dragonClasses from "./Dragon.module.css";
 //   }
 // `;
 
-const dragon = (props) => {
+class Dragon extends Component {
   // const style = {
   //   "@media (max-width:800px) ": {
   //     width: "450px",
   //     // backgroundColor:'red'
   //   },
   // };
+  render() {
+    console.log("[Dragon.js] rendering.....");
 
-  return (
-    <div className={dragonClasses.Dragon}>
-      <p onClick={props.clickPass}>
-        Playing the {props.name} for the {props.time} times!!
-      </p>
-      <p>{props.children}</p>
-      <input type="text" onChange={props.nameChange} value={props.name} />
-    </div>
-  );
-};
+    return (
+      <div className={dragonClasses.Dragon}>
+        <p onClick={this.props.clickPass}>
+          Playing the {this.props.name} for the {this.props.time} times!!
+        </p>
+        <p>{this.props.children}</p>
+        <input
+          type="text"
+          onChange={this.props.nameChange}
+          value={this.props.name}
+        />
+      </div>
+    );
+  }
+}
 
-export default dragon;
+export default Dragon;

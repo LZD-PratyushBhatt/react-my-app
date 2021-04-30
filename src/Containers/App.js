@@ -3,6 +3,12 @@ import { Component } from "react";
 import Dragons from "../Components/Dragons/Dragons";
 import Cockpit from "../Components/Cockpit/Cockpit";
 class App extends Component {
+  // First thing that executes
+  constructor(props) {
+    super(props);
+    console.log("[App.js] Constructor");
+  }
+
   state = {
     dragon: [
       { id: "1", name: "Tarash Variation", time: 15 },
@@ -10,7 +16,19 @@ class App extends Component {
       { id: "3", name: "Morphy's defense of the Ruy Lopez", time: 5 },
     ],
     isVisible: false,
+    isCockpit: true,
   };
+
+  static getDerivedStateFromProps(props, state) {
+    // 2. returns the updated state
+    console.log("[App.js] getDerivedStateFromProps", props);
+    return state;
+  }
+
+  componentDidMount() {
+    //4. Allow us to make http request
+    console.log("[App.js] componentDidMount");
+  }
 
   // FUNCTION AREA
   switchNameHandler = (newVariation) => {
@@ -27,7 +45,7 @@ class App extends Component {
   };
 
   nameChangeHandler = (event, id) => {
-    const dragon = { ...this.state.dragon.find((el) => el.id === id) };
+    const dragon = { ...this.state.dragon.find((el) => el.id === id) }; //Creating a dragon object and thus using rest
     const dragonIndex = this.state.dragon.findIndex((el) => el.id === id);
     const newDragonName = event.target.value;
     dragon.name = newDragonName;
@@ -62,6 +80,12 @@ class App extends Component {
   // NOTE: JSX code has only one parent element, and cannot have adjacent elements as parent. Thus enclose code within and DIV, and then create adjacent
   // child elements
   render() {
+    // 3. Render occurs following rendering of all child components
+
+    // If we type something, react renders App.js and then every child cmponent
+    // gets rerender in Virtual DOM, react will check if it needs to touch the real
+    //DOM, we cant prevent unnessesary renders, and that will be some optimisation.
+    console.log("[App.js] render");
     let dragonVisibility = null;
 
     if (this.state.isVisible) {
@@ -79,12 +103,23 @@ class App extends Component {
 
     return (
       <div className={appClasses.App}>
-        <Cockpit
-          len={this.state.dragon.length}
-          visible={this.state.isVisible}
-          toggle={this.toggleNameHandler}
-          title={this.props.appTitle}
-        />
+        <button
+          onClick={() => {
+            this.setState({
+              isCockpit: !this.state.isCockpit,
+            });
+          }}
+        >
+          Remove Cockpit
+        </button>
+        { this.state.isCockpit?
+          <Cockpit
+            dragons={this.state.dragon}
+            visible={this.state.isVisible}
+            toggle={this.toggleNameHandler}
+            title={this.props.appTitle}
+          />:null
+        }
         {dragonVisibility}
       </div>
     );

@@ -30,6 +30,16 @@ class App extends Component {
     console.log("[App.js] componentDidMount");
   }
 
+  shouldComponentUpdate(prevProps,prevState){
+    console.log("[App.js] shouldComponentUpdate running...")
+    return true;   //If this is false, then App.js wont update, the buttons will have no effect
+  }
+
+  componentDidUpdate(prevProps,prevState){
+    console.log("[App.js] ComponentdidUpdate running...");
+
+  }
+
   // FUNCTION AREA
   switchNameHandler = (newVariation) => {
     // console.log("I got clicked "+((this.i)++)+" times");
@@ -114,7 +124,7 @@ class App extends Component {
         </button>
         { this.state.isCockpit?
           <Cockpit
-            dragons={this.state.dragon}
+            dragonsLength={this.state.dragon.length}
             visible={this.state.isVisible}
             toggle={this.toggleNameHandler}
             title={this.props.appTitle}

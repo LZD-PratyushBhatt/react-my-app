@@ -1,5 +1,5 @@
 import CockpitClasses from "./Cockpit.module.css";
-import { useEffect } from "react";
+import React,{ useEffect } from "react";
 
 const Cockpit = (props) => {
   // useEffect is second most important React hook after useState, it combines the functionality or useCases od all these classbased lifecycle hook
@@ -30,7 +30,7 @@ const Cockpit = (props) => {
 
   useEffect(() => {
     // This useEffect runs for every update Cycle as it has no second argument!
-    console.log("2nd useEffect!");
+    console.log("[Cockpit.js] 2nd useEffect!");
     return () => {
       console.log("[Cockpit.js] 2nd useEffect running...");
     };
@@ -42,8 +42,8 @@ const Cockpit = (props) => {
   const buttonClasses = [CockpitClasses.Button];
   if (props.visible) buttonClasses.push(CockpitClasses.Black);
   const classes = [];
-  if (props.dragons.len <= 2) classes.push(CockpitClasses.blue);
-  if (props.dragons.len <= 1) classes.push(CockpitClasses.bold);
+  if (props.dragonsLength<= 2) classes.push(CockpitClasses.blue);
+  if (props.dragonsLength <= 1) classes.push(CockpitClasses.bold);
 
   return (
     <div>
@@ -60,4 +60,7 @@ const Cockpit = (props) => {
   );
 };
 
-export default Cockpit;
+export default React.memo(Cockpit);
+
+// React.memo() is memoization used by react, so basically it stores a snapshot of this component and only if its inout changes,
+// it will re-render it..

@@ -10,8 +10,8 @@ class Dragons extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     // 2
     console.log("[Dragons.js] shouldComponentUpdateRunning...");
-    // return nextProps.dragons!==this.props.dragons;
-    return true;
+    return nextProps.dragons!==this.props.dragons;
+    // return true;
   }
   getSnapshotBeforeUpdate(prevProps, prevState) {
     // 4

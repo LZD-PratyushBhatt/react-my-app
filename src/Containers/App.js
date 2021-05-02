@@ -1,8 +1,11 @@
 import appClasses from "./App.module.css";
-import { Component } from "react";
+import { PureComponent } from "react";
 import Dragons from "../Components/Dragons/Dragons";
 import Cockpit from "../Components/Cockpit/Cockpit";
-class App extends Component {
+import withClass from "../hoc/withClass";
+import Auxiliary from "../hoc/Auxiliary";
+
+class App extends PureComponent {
   // First thing that executes
   constructor(props) {
     super(props);
@@ -30,10 +33,10 @@ class App extends Component {
     console.log("[App.js] componentDidMount");
   }
 
-  shouldComponentUpdate(prevProps,prevState){
-    console.log("[App.js] shouldComponentUpdate running...")
-    return true;   //If this is false, then App.js wont update, the buttons will have no effect
-  }
+  // shouldComponentUpdate(prevProps,prevState){
+  //   console.log("[App.js] shouldComponentUpdate running...")
+  //   return true;   //If this is false, then App.js wont update, the buttons will have no effect
+  // }
 
   componentDidUpdate(prevProps,prevState){
     console.log("[App.js] ComponentdidUpdate running...");
@@ -112,7 +115,8 @@ class App extends Component {
     }
 
     return (
-      <div className={appClasses.App}>
+      // <WithClass classes={appClasses.App}>
+      <Auxiliary>
         <button
           onClick={() => {
             this.setState({
@@ -122,18 +126,20 @@ class App extends Component {
         >
           Remove Cockpit
         </button>
-        { this.state.isCockpit?
+        {this.state.isCockpit ? (
           <Cockpit
             dragonsLength={this.state.dragon.length}
             visible={this.state.isVisible}
             toggle={this.toggleNameHandler}
             title={this.props.appTitle}
-          />:null
-        }
+          />
+        ) : null}
         {dragonVisibility}
-      </div>
+      </Auxiliary>
+      //  </WithClass>
     );
   }
 }
+// First argument is the component that you wanna wrap, and the next arguments are according to the function definition of withClasses or the HOC.
 
-export default App;
+export default withClass(App,appClasses.App);

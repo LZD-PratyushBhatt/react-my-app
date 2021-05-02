@@ -1,6 +1,8 @@
 import Dragon from "./Dragon/Dragon";
 import { Component } from "react";
 
+// IF you want to implement a check in shouldComponentUpdate that checks/Compare for all the props that matter
+// to the component, then use PureComponent instead of Component, and dont use ShouldComponentUpdate.
 class Dragons extends Component {
   // static getDerivedStateFromProps(props, state) {
   //   // 1
@@ -10,7 +12,7 @@ class Dragons extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     // 2
     console.log("[Dragons.js] shouldComponentUpdateRunning...");
-    return nextProps.dragons!==this.props.dragons;
+    return nextProps.dragons !== this.props.dragons;
     // return true;
   }
   getSnapshotBeforeUpdate(prevProps, prevState) {
@@ -24,7 +26,7 @@ class Dragons extends Component {
     console.log(snapshot);
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     // CLEANUP WORK when a component is removed!!
     console.log("[Dragons.js] Component will unMount running...");
   }

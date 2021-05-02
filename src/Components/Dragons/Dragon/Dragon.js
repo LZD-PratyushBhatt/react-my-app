@@ -1,6 +1,7 @@
 import dragonClasses from "./Dragon.module.css";
-import { Component } from "react";
-
+import React, { Component } from "react";
+import Aux from "../../../hoc/Auxiliary";
+import withClass from "../../../hoc/withClass";
 // import styled from "styled-components";
 // import Radium from "radium";
 
@@ -29,7 +30,10 @@ class Dragon extends Component {
     console.log("[Dragon.js] rendering.....");
 
     return (
-      <div className={dragonClasses.Dragon}>
+      // <div className={dragonClasses.Dragon}>
+      // React has a built in Aux like HOC, its called React.Fragment
+      // <React.Fragment>
+      <Aux>
         <p onClick={this.props.clickPass}>
           Playing the {this.props.name} for the {this.props.time} times!!
         </p>
@@ -39,9 +43,12 @@ class Dragon extends Component {
           onChange={this.props.nameChange}
           value={this.props.name}
         />
-      </div>
+
+      </Aux>
+      // </React.Fragment>
+
     );
   }
 }
 
-export default Dragon;
+export default withClass(Dragon,dragonClasses.Dragon);
